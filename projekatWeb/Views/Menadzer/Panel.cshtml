@@ -1,0 +1,58 @@
+﻿@using projekatWeb.Models
+@using projekatWeb.DTOs
+@model MenadzerDto
+@{
+    ViewBag.Title = "Panel";
+    int brKolona = 3;
+}
+
+<h2 class="text-center">Rezervacije Vasih aranzamana</h2>
+
+<div class="row">
+@foreach (var item in Model.Rezervacije)
+{
+    if(Model.Rezervacije.IndexOf(item) % brKolona == 0)
+    {
+        if (Model.Rezervacije.IndexOf(item) != 0)
+        {
+            @:</div> <!--zatvaram red pre-->
+        }
+        @:<div class="row mt-4"> <!--zapocinjem novi red-->
+    }
+        <div class="col-4">
+            <div class="card">
+                <h5 class="card-header">Rezervacija</h5>
+                <div class="card-body">
+                    <h5 class="card-title">ID: @item.IdRezervacije</h5>
+                    <p class="card-text"><b>Status rezervacije:</b> @(item.Status ? "Aktivna" : "Istekla")</p>
+
+                    @foreach (var korinik in Model.KorisniciRez)
+                    {
+                        if (korinik.Id == item.IdTurista)
+                        {
+                            <p class="card-text"><b>Tursita:</b> @korinik.Ime @korinik.Prezime</p>
+                            //da ne ispsuje vise puta ako kroisnik ima vise ovih rezervacija
+                            break;
+                        }
+                    }
+
+                    @foreach (var aranzman in Model.KreiraniAranzmani)
+                    {
+                        if (aranzman.Id == item.IdAranzman)
+                        {
+                            <p class="card-text"><b>Aranzman: </b> @aranzman.NazivAranzmana</p>
+                            break;
+                        }
+                    }
+
+                <form action="~/Rezervacija/Redirekcija" method="post">
+                    <input type="hidden" name="idAranzmana" value="@item.IdAranzman" />
+                    <input type="hidden" name="idSmestajneJedinice" value="@item.IdSmestajneJedinice" />
+                    <button class="btn btn-success" type="submit">Detalji</button>
+                </form>
+                </div>
+            </div>
+        </div>
+}
+
+</div>

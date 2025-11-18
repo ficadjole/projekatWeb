@@ -1,0 +1,247 @@
+﻿@using projekatWeb.Models
+@model IEnumerable<Aranzman>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    <h1 class="text-center mb-4">Dobro dosli, ovo su nasi aranzmani!</h1>
+    <section>
+        <!--Pretraga-->
+        <div class="mb-4">
+            <form action="~/Home/PretragaAranzmana" method="post">
+                <div class="d-flex align-items-center justify-content-start gap-2 flex-wrap mb-2">
+
+                    <div>
+                        <label>Naziv aranzmana</label>
+                        <input type="text" class="form-control mt-2" placeholder="Naziv aranžmana" name="nazivAranzmana">
+                    </div>
+
+                    <div>
+                        <label for="tipAranzmana" class="form-label">Tip aranzmana</label>
+                        <select class="form-control" name="tipAranzmana" id="tipAranzmana">
+                            <option value="">Svi</option>
+                            <option value="nocenje_sa_doruckom">Nocenje sa doruckom</option>
+                            <option value="polupansion">Polupansion</option>
+                            <option value="pun_pansion">Pun pansion</option>
+                            <option value="all_inclusive">All inclusive</option>
+                            <option value="najam_apartmana">Najam apartmana</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="tipPrevoza" class="form-label">Tip prevoza</label>
+                        <select class="form-control" name="tipPrevoza" id="tipPrevoza">
+                            <option value="">Svi</option>
+                            <option value="avion">Avion</option>
+                            <option value="autobus">Autobus</option>
+                            <option value="autobus_i_avion">Autobus i avion</option>
+                            <option value="individualan">Individualan</option>
+                            <option value="ostalo">Ostalo</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="minDatumPolaska" class="form-label">Donja granica polaska</label>
+                        <input type="date" class="form-control" id="minDatumPolaska" name="minDatumPolaska">
+                    </div>
+                    <div>
+                        <label for="maxDatumPolaska" class="form-label">Gornja granica polaska</label>
+                        <input type="date" class="form-control" id="maxDatumPolaska" name="maxDatumPolaska">
+                    </div>
+                    <div>
+                        <label for="minDatumPovratka" class="form-label">Donja granica povratka</label>
+                        <input type="date" class="form-control" id="minDatumPovratka" name="minDatumPovratka">
+                    </div>
+                    <div>
+                        <label for="maxDatumPovratka" class="form-label">Gornja granica povratka</label>
+                        <input type="date" class="form-control" id="maxDatumPovratka" name="maxDatumPovratka">
+                    </div>
+
+
+                </div>
+                <div class="justify-content-center d-flex align-items-center">
+                    <div class="mt-4">
+                        <button type="submit" name="akcija" value="pretrazi" class="btn btn-success">Pretraži</button>
+                        <button type="submit" name="akcija" value="osvezi" class="btn btn-danger">Osveži</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <table class="table table-dark table-striped-columns text-center">
+                <thead>
+                    <tr>
+                        <td>
+                            Naziv
+                            <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajName", "Home", new {vrsta = "asc" })">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+                                </svg>
+                            </a>
+                            <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajName", "Home", new {vrsta = "desc" })">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+                                </svg>
+                            </a>
+                        </td>
+                        <td>
+                            Tip aranzmana
+                        </td>
+                        <td>
+                            Tip Prevoza
+                        </td>
+                        <td>Destinacija</td>
+                        <td>
+                            Datum Polaska
+                            <!--Ikonica strelica ka gore-->
+                            <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajDatum", "Home", new { datum = "DatumPolaska", vrsta = "asc" })">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+                                </svg>
+                            </a>
+                            <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajDatum", "Home", new { datum = "DatumPolaska", vrsta = "desc" })">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+                                </svg>
+                            </a>
+                        </td>
+                        <td>
+                            Datum Povratka
+                            <!--Ikonica strelica ka gore-->
+                            <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajDatum", "Home", new { datum = "DatumPovratka", vrsta = "desc" })">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+                                </svg>
+                            </a>
+                            <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajDatum", "Home", new { datum = "DatumPovratka", vrsta = "desc" })">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+                                </svg>
+                            </a>
+                        </td>
+                        <td>MaksBrPutnika</td>
+                        <td></td>
+                        @if (ViewBag.Korisnik != null && ViewBag.Korisnik.Uloga.Equals(Uloga.Menadzer))
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (!item.LogickoBrisanje)
+                        {
+                            <tr>
+                                <td>
+                                    @item.NazivAranzmana
+                                </td>
+                                @switch (item.TipAranzmana)
+                                {
+                                    case TipAranzmana.nocenje_sa_doruckom:
+                                        {
+                                            <td>Nocenje sa doruckom</td>
+                                        }
+                                        break;
+                                    case TipAranzmana.polupansion:
+                                        {
+                                            <td>Polupansion</td>
+                                        }
+                                        break;
+                                    case TipAranzmana.pun_pansion:
+                                        {
+                                            <td>Pun pansion</td>
+                                        }
+                                        break;
+                                    case TipAranzmana.all_inclusive:
+                                        {
+                                            <td>All inclusive</td>
+                                        }
+                                        break;
+                                    case TipAranzmana.najam_apartmana:
+                                        {
+                                            <td>Najam apartmana</td>
+                                        }
+                                        break;
+
+                                }
+                                @switch (item.TipPrevoza)
+                                {
+                                    case TipPrevoza.autobus:
+                                        {
+                                            <td>Autobus</td>
+                                        }
+                                        break;
+                                    case TipPrevoza.avion:
+                                        {
+                                            <td>Avion</td>
+                                        }
+                                        break;
+                                    case TipPrevoza.autobus_i_avion:
+                                        {
+                                            <td>Autobus i avion</td>
+                                        }
+                                        break;
+                                    case TipPrevoza.individualan:
+                                        {
+                                            <td>Individualan</td>
+                                        }
+                                        break;
+                                    case TipPrevoza.ostalo:
+                                        {
+                                            <td>Ostalo</td>
+                                        }
+                                        break;
+                                }
+                                <td>@item.Destinacija</td>
+                                <td>@item.DatumPolaska</td>
+                                <td>@item.DatumPovratka</td>
+                                <td>@item.MaksBrPutnika</td>
+                                <td>@Html.ActionLink("Detalji", "Detalji", "Aranzman", new { id = item.Id }, null)</td>
+                                @if (ViewBag.Korisnik != null && ViewBag.Korisnik.Uloga.Equals(Uloga.Menadzer))
+                                {
+
+                                    if (ViewBag.Korisnik.KreiraniAranzmani.Contains(item.Id))
+                                    {
+                                        <td>
+                                            @Html.ActionLink("Uredi", "Uredi", "Aranzman", new { id = item.Id }, null)
+                                        </td>
+                                        <td>
+                                            @if (item.LogickoBrisanje == false)
+                                            {
+                                                @Html.ActionLink("Obrisi", "Obrisi", "Aranzman", new { id = item.Id }, null)
+                                            }
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                        <td></td>
+                                    }
+                                }
+                            </tr>
+                        }
+
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    @if (ViewBag.Poruka != null)
+    {
+        <div class="alert alert-info text-center" role="alert">
+            @ViewBag.Poruka
+        </div>
+    }
+
+    @if (ViewBag.Korisnik != null && ViewBag.Korisnik.Uloga.Equals(Uloga.Menadzer))
+    {
+        <div class="container text-center my-4">
+            @Html.ActionLink("Dodaj novi aranzman", "DodajAranzman", "Aranzman", null, new { @class = "btn btn-success" })
+        </div>
+    }
+</main>

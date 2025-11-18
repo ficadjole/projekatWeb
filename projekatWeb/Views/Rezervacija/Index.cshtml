@@ -1,0 +1,78 @@
+﻿@using projekatWeb.Models
+@using projekatWeb.DTOs
+@model RezervacijaDto
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container text-center">
+    <div class="row bg-black bg-opacity-25 rounded">
+        <h1 class="text-center text-decoration-underline">Aranzman: @Model.Aranzman.NazivAranzmana</h1>
+        <div class="col-12 text-lg-start">
+            <div class="container my-3">
+                <div class="row">
+                    <!-- Tekst -->
+                    <div class="col-md-6">
+                        <p><b>Destinacija:</b> @Model.Aranzman.Destinacija</p>
+                        <p><b>Datum polaska:</b> @Model.Aranzman.DatumPolaska</p>
+                        <p><b>Datum povratka:</b> @Model.Aranzman.DatumPovratka</p>
+                        <p><b>Program:</b></p>
+                        <p>@Model.Aranzman.ProgramAranzmana</p>
+                        <p class="fw-bold">Opis: </p>
+                        <p>@Model.Aranzman.OpisAranzmana</p>
+                        <p><b>Maksimalan broj putnika:</b> @Model.Aranzman.MaksBrPutnika</p>
+                        <p><b>Tip aranzmana: </b></p>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <h3 class="text-decoration-underline">Smestaj</h3>
+                                <p><b>Naziv smestaja:</b> @Model.Smestaj.NazivSmestaja</p>
+                                <p><b>Tip smestaja:</b> @Model.Smestaj.TipSmestaja</p>
+                                <p><b>Broj zvezdica:</b> @Model.Smestaj.BrojZvezdica</p>
+                                <p><b>Osobe sa invaliditetom:</b> @(Model.Smestaj.OsobeSaInvaliditetom ? "Da" : "Ne")</p>
+                                <p><b>Spa centar:</b> @(Model.Smestaj.SpaCentar ? "Da" : "Ne")</p>
+                                <p><b>Bazen:</b> @(Model.Smestaj.Bazen ? "Da" : "Ne")</p>
+                            </div>
+                            <div class="col-6">
+                                <h3 class="text-decoration-underline">Smestajna jedinica</h3>
+                                <p><b>Cena:</b> @Model.SmestajnaJedinica.CenaJedinice</p>
+                                <p><b>Dozvoljen broj gostiju:</b> @Model.SmestajnaJedinica.MaksBrOsoba</p>
+                                <p><b>Osobe sa invaliditetom:</b> @(Model.SmestajnaJedinica.PetFriendly ? "Da" : "Ne")</p>
+                            </div>
+                        </div>
+                            <div class="container text-end d-flex justify-content-end gap-2">
+
+                                <form method="post" action="~/Rezervacija/Rezervacija">
+                                    <input type="hidden" name="idAranzmana" value="@Model.Aranzman.Id" />
+                                    <input type="hidden" name="idSmestajneJedinice" value="@Model.SmestajnaJedinica.Id" />
+                                    <input type="hidden" name="idSmestaja" value="@Model.Smestaj.Id" />
+
+                                    <button type="submit" class="btn btn-lg btn-success">Rezerviši</button>
+                                </form>
+
+
+                                <a href="@Url.Action("Detalji", "Aranzman", new { id = Model.Aranzman.Id })" class="btn btn-lg btn-danger">Odustani</a>
+
+                            </div>
+
+                        <div class="container mt-2">
+                            @if (ViewBag.Poruka != null)
+                            {
+                                <p class="bg-danger p-2 rounded text-center">@ViewBag.Poruka</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Slika -->
+                    <div class="col-md-6 text-center">
+                        <img src="@Url.Content(Model.Aranzman.PosterAranzmanaUrl)"
+                             alt="Poster aranzmana"
+                             class="rounded img-thumbnail w-75" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,106 @@
+[
+  {
+    "Id": 1,
+    "MaksBrOsoba": 2,
+    "PetFriendly": false,
+    "CenaJedinice": 200,
+    "Dostupnost": false,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 2,
+    "MaksBrOsoba": 4,
+    "PetFriendly": false,
+    "CenaJedinice": 400,
+    "Dostupnost": false,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 3,
+    "MaksBrOsoba": 2,
+    "PetFriendly": false,
+    "CenaJedinice": 200,
+    "Dostupnost": true,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 4,
+    "MaksBrOsoba": 5,
+    "PetFriendly": false,
+    "CenaJedinice": 500,
+    "Dostupnost": true,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 5,
+    "MaksBrOsoba": 1,
+    "PetFriendly": true,
+    "CenaJedinice": 220,
+    "Dostupnost": false,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 6,
+    "MaksBrOsoba": 2,
+    "PetFriendly": false,
+    "CenaJedinice": 600,
+    "Dostupnost": true,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 7,
+    "MaksBrOsoba": 3,
+    "PetFriendly": false,
+    "CenaJedinice": 500,
+    "Dostupnost": true,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 8,
+    "MaksBrOsoba": 2,
+    "PetFriendly": true,
+    "CenaJedinice": 300,
+    "Dostupnost": true,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 9,
+    "MaksBrOsoba": 1,
+    "PetFriendly": false,
+    "CenaJedinice": 350,
+    "Dostupnost": false,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 10,
+    "MaksBrOsoba": 5,
+    "PetFriendly": true,
+    "CenaJedinice": 300,
+    "Dostupnost": false,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 11,
+    "MaksBrOsoba": 5,
+    "PetFriendly": false,
+    "CenaJedinice": 300,
+    "Dostupnost": false,
+    "LogickoBrisanje": false
+  },
+  {
+    "Id": 12,
+    "MaksBrOsoba": 5,
+    "PetFriendly": false,
+    "CenaJedinice": 50,
+    "Dostupnost": true,
+    "LogickoBrisanje": true
+  },
+  {
+    "Id": 13,
+    "MaksBrOsoba": 5,
+    "PetFriendly": true,
+    "CenaJedinice": 50,
+    "Dostupnost": true,
+    "LogickoBrisanje": true
+  }
+]

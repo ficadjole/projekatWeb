@@ -1,0 +1,431 @@
+﻿@using projekatWeb.Models
+@model projekatWeb.DTOs.AranzmanDetailsDto
+@{
+    ViewBag.Title = "Detalji";
+    bool komentarisaoJe = false;
+
+    if(ViewBag.Korisnik != null)
+    {
+        foreach (var item in Model.Komentari)
+        {
+            if (item.IdKorisnika == ViewBag.Korisnik.Id)
+            {
+                komentarisaoJe = true;
+            }
+        }
+    }
+
+}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-2">
+
+        </div>
+        <div class="col-lg-8">
+
+            <div class="container text-center">
+                <h1>@Model.Aranzman.NazivAranzmana</h1>
+                <div class="row">
+                    <div class="col-6"><p class="fw-bold">Datum polaska: @Model.Aranzman.DatumPolaska</p></div>
+                    <div class="col-6"><p class="fw-bold">Datum povratka: @Model.Aranzman.DatumPovratka</p></div>
+                </div>
+                <div class="row">
+                    <div class="col-8 text-lg-start">
+                        <div class="row">
+                            <h3><b>Destinacija: </b> @Model.Aranzman.Destinacija</h3>
+                        </div>
+                        <div class="row">
+                            <p><b>Opis: </b> @Model.Aranzman.OpisAranzmana</p>
+                        </div>
+                        <div class="row">
+                            <p><b>Program aranzmana: </b> @Model.Aranzman.ProgramAranzmana</p>
+                        </div>
+                        <div class="row">
+                            <p><b>Maksimalan broj putnika: </b> @Model.Aranzman.MaksBrPutnika</p>
+                        </div>
+                        <div class="row">
+                            @switch (Model.Aranzman.TipAranzmana)
+                            {
+                                case TipAranzmana.nocenje_sa_doruckom:
+                                    {
+                                        <p><b>Tip aranzmana: </b> Nocenje sa doruckom</p>
+                                    }
+                                    break;
+                                case TipAranzmana.polupansion:
+                                    {
+                                        <p>
+                                            <b>Tip aranzmana: </b>Polupansion
+                                        </p>
+                                    }
+                                    break;
+                                case TipAranzmana.pun_pansion:
+                                    {
+                                        <p>
+                                            <b>Tip aranzmana: </b>Pun pansion
+                                        </p>
+                                    }
+                                    break;
+                                case TipAranzmana.all_inclusive:
+                                    {
+                                        <p>
+                                            <b>Tip aranzmana: </b>All inclusive
+                                        </p>
+                                    }
+                                    break;
+                                case TipAranzmana.najam_apartmana:
+                                    {
+                                        <p>
+                                            <b>Tip aranzmana: </b>Najam apartmana
+                                        </p>
+                                    }
+                                    break;
+
+                            }
+                        </div>
+
+                        <div class="row">
+                            @switch (Model.Aranzman.TipPrevoza)
+                            {
+                                case TipPrevoza.autobus:
+                                    {
+                                        <p>
+                                            <b>Tip prevoza: </b>
+                                            Autobus
+                                        </p>
+
+                                    }
+                                    break;
+                                case TipPrevoza.avion:
+                                    {
+                                        <p>
+                                            <b>Tip prevoza: </b>
+                                            Avion
+                                        </p>
+                                    }
+                                    break;
+                                case TipPrevoza.autobus_i_avion:
+                                    {
+                                        <p>
+                                            <b>Tip prevoza: </b>
+                                            Autobus i avion
+                                        </p>
+                                    }
+                                    break;
+                                case TipPrevoza.individualan:
+                                    {
+                                        <p>
+                                            <b>Tip prevoza: </b>
+                                            Individualan
+                                        </p>
+                                    }
+                                    break;
+                                case TipPrevoza.ostalo:
+                                    {
+                                        <p>
+                                            <b>Tip prevoza: </b>
+                                            Ostalo
+                                        </p>
+                                    }
+                                    break;
+                            }
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <img src="@Url.Content(Model.Aranzman.PosterAranzmanaUrl)" alt="Poster aranzmana" class="rounded img-thumbnail" />
+                    </div>
+                </div>
+            </div>
+
+            <!--Smestaj-->
+
+            <div class="container">
+                <h3>Smestaj</h3>
+                <div class="row">
+                    <div class="col-6 text-center align-content-center">
+                        <p><b> Naziv: </b>@Model.Smestaj.NazivSmestaja</p>
+                        @switch (Model.Smestaj.TipSmestaja)
+                        {
+                            case TipSmestaja.hotel:<p><b>Tip smestaja:</b> hotel</p> break;
+                            case TipSmestaja.motel: <p><b>Tip smestaja:</b> motel</p>break;
+                            case TipSmestaja.vila: <p><b>Tip smestaja:</b> vila</p>break;
+                        }
+                        <p><b>Broj zvezdica:</b> @Model.Smestaj.BrojZvezdica</p>
+                    </div>
+                    <div class="col-6 text-center">
+                        <p><b>Invaliditet: </b>@(Model.Smestaj.OsobeSaInvaliditetom ? "Da" : "Ne")</p>
+                        <p><b>Spa centar: </b>@(Model.Smestaj.SpaCentar ? "Da" : "Ne")</p>
+                        <p><b>Bazen: </b>@(Model.Smestaj.Bazen ? "Da" : "Ne")</p>
+                        <p><b>Wifi: </b>@(Model.Smestaj.Wifi ? "Da" : "Ne")</p>
+                    </div>
+                </div>
+            </div>
+
+        <!--Pretrage-->
+        <div class="container my-5">
+            <div class="card my-4">
+                <div class="card-header text-center fw-bold">
+                    Pretraga smestajne jedinice
+                </div>
+                <div class="card-body">
+                    <form action="~/Aranzman/PretragaJedinice" method="post">
+                        <div class="row g-3">
+                            <input type="hidden" value="@Model.Aranzman.Id" name="idAranzmana"/>
+                            <input type="hidden" value="@Model.Smestaj.Id" name="idSmestaja"/>
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" placeholder="Min gostiju" aria-label="MinGostiju" name="minGostiju" min="1">
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" placeholder="Max gostiju" aria-label="MaxGostiju" name="maxGostiju" min="1">
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="number" class="form-control" placeholder="Cena" aria-label="Cena" name="cena" min="0" step="10">
+                            </div>
+
+                            <div class="col-md-6 d-flex align-items-center">
+                                <label class="fw-bold me-3">Pet friendly: </label>
+                                <div class="form-check me-3">
+                                    <input class="form-check-input" type="radio" name="petFriendly" id="petDa" value="true">
+                                    <label class="form-check-label" for="petDa">Da</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="petFriendly" id="petNe" value="false">
+                                    <label class="form-check-label" for="petNe">Ne</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+
+                            <button type="submit" name="akcija" value="pretrazi" class="btn btn-success me-2">Pretraži</button>
+                            <button type="submit" name="akcija" value="osvezi" class="btn btn-danger">Osveži</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!--Sortiranje-->
+            <div class="d-flex justify-content-center gap-5">
+                <div class="d-flex align-items-center">
+                    <p class="fw-bold mb-0 me-2">Sortiraj po gostima</p>
+                    <a href="@Url.Action("SortirajSmestaj", "Aranzman", new { kriterijum = "brGostiju", vrsta = "asc", idAranzmana = Model.Aranzman.Id, idSmestaja = Model.Smestaj.Id })" class="mx-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+                        </svg>
+                    </a>
+                    <a href="@Url.Action("SortirajSmestaj", "Aranzman", new { kriterijum = "brGostiju", vrsta = "desc", idAranzmana = Model.Aranzman.Id, idSmestaja = Model.Smestaj.Id })" class="mx-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p class="fw-bold mb-0 me-2">Sortiraj po ceni</p>
+                    <a href="@Url.Action("SortirajSmestaj", "Aranzman", new { kriterijum = "cena", vrsta = "asc", idAranzmana = Model.Aranzman.Id, idSmestaja = Model.Smestaj.Id })" class="mx-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+                        </svg>
+                    </a>
+                    <a href="@Url.Action("SortirajSmestaj", "Aranzman", new { kriterijum = "cena", vrsta = "desc", idAranzmana = Model.Aranzman.Id, idSmestaja = Model.Smestaj.Id })" class="mx-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+            <!--Smestajne jedinice-->
+
+            <div class="container text-center">
+                <h3>Smestajne jedinice</h3>
+                <div class="row">
+
+                    @if (Model.SmestajnaJedinica.Count() > 0)
+                    {
+
+                        foreach (var item in Model.SmestajnaJedinica)
+                        {
+
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Smestajna jedinica
+                                    </div>
+                                    <div class="card-body">
+                                        <dl class="row">
+                                            <dt class="col-6 fw-bold">Cena jedinice: </dt>
+                                            <dd class="col-6 ">@item.CenaJedinice</dd>
+
+                                            <dt class="col-6 fw-bold">Maksimalan broj osoba: </dt>
+                                            <dd class="col-6">@item.MaksBrOsoba</dd>
+
+                                            <dt class="col-6 fw-bold">Pet friendly: </dt>
+                                            <dd class="col-6">@(item.PetFriendly ? "Da" : "Ne")</dd>
+                                        </dl>
+                                        @if (ViewBag.Korisnik != null && (ViewBag.Korisnik.Uloga.Equals(Uloga.Menadzer) || ViewBag.Korisnik.Uloga.Equals(Uloga.Administrator)))
+                                        {
+                                            //Menadzer ne vidi nista
+                                            //isto ne vidi ni admin
+                                        }
+                                        else if (item.Dostupnost && Model.Aranzman.DatumPolaska.AsDateTime() >= DateTime.Now)
+                                        {
+                                            if (ViewBag.Korisnik != null)
+                                            {
+                                                <a href="@Url.Action("Index", "Rezervacija", new {idAranzmana = Model.Aranzman.Id,idSmestajneJedinice = item.Id,idSmestaja = Model.Smestaj.Id})" class="btn btn-success">Rezervisi</a>
+
+                                            }
+                                            else if (ViewBag.Korisnik == null)
+                                            {
+                                                <a href="~/Auth/Index" class="btn btn-success">Rezervisi</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btn btn-danger disabled" tabindex="-1" aria-disabled="true">Nije dostupno</a>
+                                        }
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        }
+
+                    }
+                    else
+                    {
+                        <h4>Trenutno nemamo raspolozivih smestajnih jedinica</h4>
+                    }
+                </div>
+            </div>
+
+            <!--Komentari-->
+            <div class="container my-4">
+                <h3 class="mb-4">Komentari</h3>
+                @if (ViewBag.Poruka != null)
+                {
+                    <p class="bg-info">@ViewBag.Poruka</p>
+                }
+                @if (Model.Aranzman.DatumPovratka.AsDateTime() > DateTime.Now)
+                {
+                    <h4 class="mt-4">Komentari su moguci nakon zavrsetka aranzmana</h4>
+                }
+                else
+                {
+                    if (Model.Komentari.Count() == 0)
+                    {
+
+                        <h4 class="mt-4">Trenutno nema komentara za ovaj smestaj!</h4>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Komentari)
+                        {
+                            if (item.Odobren)
+                            {
+                                <div class="d-flex justify-content-start bg-dark bg-opacity-25 rounded p-2 mt-2">
+                                    @foreach (var korisnik in Model.Korisnici)
+                                    {
+                                        if (item.IdKorisnika == korisnik.Id)
+                                        {
+                                            <p><b>@korisnik.Ime: </b></p>
+                                        }
+                                    }
+                                    <p class="mx-4">@item.TekstKomentara</p>
+
+                                    <p><b>Ocena:</b> @item.Ocena/5</p>
+
+                                </div>
+                            }
+                            else if (item.Odobren == false && ViewBag.Korisnik != null && ViewBag.Korisnik.Uloga.Equals(Uloga.Menadzer))
+                            {
+
+                                if (ViewBag.Korisnik.KreiraniAranzmani.Contains(Model.Aranzman.Id))
+                                {
+                                    <div class="d-flex justify-content-start bg-dark bg-opacity-25 rounded p-2 mt-2">
+                                        @foreach (var korisnik in Model.Korisnici)
+                                        {
+                                            if (item.IdKorisnika == korisnik.Id)
+                                            {
+                                                <p><b>@korisnik.Ime: </b></p>
+                                            }
+                                        }
+                                        <p class="mx-2">@item.TekstKomentara</p>
+
+                                        <p><b>Ocena:</b> @item.Ocena/5</p>
+
+                                        <form action="~/Aranzman/OdobriKomentar" method="post" class="mx-3">
+                                            <input type="hidden" value="@item.Id" name="idKomentara" />
+                                            <input type="hidden" value="@Model.Aranzman.Id" name="idAranzmana" />
+                                            <input type="submit" value="Odobri" name="status" class="btn btn-success" />
+                                            <input type="submit" value="Odbji" name="status" class="btn btn-danger" />
+                                        </form>
+
+                                    </div>
+                                }
+
+                            }
+
+
+                        }
+                    }
+
+                    if (ViewBag.Korisnik != null && ViewBag.Korisnik.Uloga != Uloga.Menadzer && ViewBag.Korisnik.Uloga != Uloga.Administrator)
+                    {
+                        foreach (var rezervacija in Model.Rezervacije)
+                        {
+                            if (rezervacija.IdTurista == ViewBag.Korisnik.Id)
+                            {
+                                ViewBag.MozeKomentar = true;
+                            }
+                        }
+
+                        if (ViewBag.MozeKomentar == true)
+                        {
+                            if (komentarisaoJe)
+                            {
+                                <h4 class="mt-4">Vec ste ostavili komentar za ovaj smestaj</h4>
+
+                            }
+                            else
+                            {
+                                <h4 class="mt-4">Ostavite komentar</h4>
+                                <div class="container-fluid mt-4 ">
+                                    <form action="~/Aranzman/DodajKomentar" method="post">
+                                        <input type="hidden" value="@Model.Aranzman.Id" name="idAranzmana" />
+                                        <input type="hidden" value="@ViewBag.Korisnik.Id" name="idKorisnika" />
+                                        <input type="hidden" value="@Model.Smestaj.Id" name="idSmestaja" />
+                                        <input type="text" id="komentar" name="tekst" class="w-100" />
+                                        <input type="number" id="ocena" name="ocena" style="width:60px" min="0" max="5" />
+                                        <input type="submit" value="Dodaj komentar" class="btn btn-dark" />
+                                    </form>
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <h4 class="mt-4">Komentarisanje je moguce samo ako ste odseli u ovom smestaju</h4>
+                        }
+
+                    }
+
+                }
+
+            </div>
+
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+</div> 
+
+
+

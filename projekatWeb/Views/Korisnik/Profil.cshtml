@@ -1,0 +1,182 @@
+﻿@using projekatWeb.Models
+@model Korisnik
+@{
+    ViewBag.Title = "Profil";
+
+    DateTime datum = Model.DatumRodjenja.AsDateTime();
+
+    string datumVrednost = datum.ToString("yyyy-MM-dd");
+}
+
+
+<div class="container h-50 w-50">
+    <h2 class="text-center">Dobro dosao, @Model.KorisnickoIme!</h2>
+    <form class="row g-3 needs-validation bg-dark bg-opacity-25 my-3 rounded py-3" novalidate action="~/Korisnik/Azuriraj" method="post">
+        <div class="col-md-6">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="Uloga" value="@Model.Uloga"/>
+            <label for="Ime" class="form-label">Ime</label>
+            <input type="text" class="form-control" id="Ime" name="Ime" value="@Model.Ime" required>
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="prezime" class="form-label">Prezime</label>
+
+                    <input type="text" class="form-control" id="prezime" name="Prezime" value="@Model.Prezime" required>
+
+
+            
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="korisnickoIme" class="form-label">Korisnicko ime</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="korisnickoIme" name="KorisnickoIme" value="@Model.KorisnickoIme" aria-describedby="inputGroupPrepend" required>
+                <div class="valid-feedback">
+                    Odlicno je!
+                </div>
+                <div class="invalid-feedback">
+                    Molim Vas unesite podatke.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Lozinka</label>
+            <div class="row">
+                <div class="col-8">
+                    <input type="password" class="form-control" id="password" name="Lozinka" value="@Model.Lozinka" required>
+                </div>
+                <div class="col-4 text-center">
+                    <button class="btn btn-outline-info" id="ucitajPassword" type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="Email" value="@Model.Email" required>
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="datum" class="form-label">Datum rodjenja</label>
+            <input type="date" class="form-control" id="datum" name="DatumRodjenja" value="@datumVrednost" required>
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label class="mb-2">Pol</label>
+            <div class="row">
+                <div class="col-6">
+                    <input class="form-check-input" type="radio" value="Muski" checked="@(Model.Pol==Pol.Muski)" name="Pol" id="polM" required>
+                    <label class="form-label" for="polM">Muski</label>
+                    <div class="valid-feedback">
+                        Odlicno je!
+                    </div>
+                    <div class="invalid-feedback">
+                        Molim Vas unesite podatke.
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input class="form-check-input" type="radio" value="Zenski" checked="@(Model.Pol==Pol.Zenski)" name="Pol" id="polZ" required>
+                    <label class="form-label" for="polZ">Zenski</label>
+                    <div class="valid-feedback">
+                        Odlicno je!
+                    </div>
+                    <div class="invalid-feedback">
+                        Molim Vas unesite podatke.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success" type="submit">Azuriraj podatke</button>
+
+                </div>
+                @if (ViewBag.Poruka != null && ViewBag.Uspesno != null)
+                {
+
+                    <div class="col">
+
+                        @if (ViewBag.Uspesno)
+                        {
+                            <p class="bg-success p-2">@ViewBag.Poruka</p>
+                        }
+                        else
+                        {
+                            <p class="bg-danger p-2 rounded">@ViewBag.Poruka</p>
+                        }
+
+                    </div>
+
+                }
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    (function () {
+        'use strict'
+
+        // Selektuje sve forme sa needs-validation klasom
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    document.getElementById("ucitajPassword").addEventListener("click", function () {
+        const sifra = document.getElementById("password");
+        const dugme = document.getElementById("ucitajPassword");
+
+        if (sifra.type === "password") {
+            sifra.type = "text";
+            dugme.className = "btn btn-info"
+        } else {
+            sifra.type = "password";
+            dugme.className = "btn btn-outline-info";
+        }
+
+    })
+</script>
+

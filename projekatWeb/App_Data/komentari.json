@@ -1,0 +1,18 @@
+[
+  {
+    "Id": 1,
+    "IdKorisnika": 5,
+    "IdSmestaja": 4,
+    "TekstKomentara": "Veoma mi se svidelo",
+    "Ocena": 4,
+    "Odobren": true
+  },
+  {
+    "Id": 2,
+    "IdKorisnika": 4,
+    "IdSmestaja": 4,
+    "TekstKomentara": "Zanimljivo je, ali bi moglo biti malo boljeq",
+    "Ocena": 2,
+    "Odobren": false
+  }
+]

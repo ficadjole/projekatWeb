@@ -1,0 +1,84 @@
+﻿@using projekatWeb.Models
+@using projekatWeb.DTOs
+@model int
+@{
+    ViewBag.Title = "DodajSmestaj";
+}
+
+
+<div class="container d-flex justify-content-center mt-4">
+    <div class="col-6">
+        <div class="bg-black bg-opacity-25 p-4 rounded">
+            <h3 class="text-center mb-4">Smestaj</h3>
+
+            <form action="~/Aranzman/KreirajSmestaj" method="post">
+                <input type="hidden" name="IdAranzmana" value="@Model" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="NazivSmestaja" class="form-label"><b>Naziv:</b></label>
+                            <input type="text" class="form-control" id="NazivSmestaja" name="NazivSmestaja" placeholder="Naziv" required/>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="TipSmestaja" class="form-label"><b>Tip smestaja:</b></label>
+                            <select class="form-select" id="TipSmestaja" name="TipSmestaja" required>
+                                <option value="hotel">Hotel</option>
+                                <option value="motel">Motel</option>
+                                <option value="vila">Vila</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="BrojZvezdica" class="form-label"><b>Broj zvezdica:</b></label>
+                            <input type="number" class="form-control" id="BrojZvezdica" name="BrojZvezdica" min="1" max="5" value="1" required/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label><b>Invaliditet</b></label><br />
+                            <input type="radio" id="OsobeSaInvaliditetomDa" name="OsobeSaInvaliditetom" value="true" />
+                            <label for="OsobeSaInvaliditetomDa">Da</label>
+
+                            <input type="radio" id="OsobeSaInvaliditetomNe" name="OsobeSaInvaliditetom" value="false" checked/>
+                            <label for="OsobeSaInvaliditetomNe">Ne</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label><b>Spa centar</b></label><br />
+                            <input type="radio" id="SpaCentarDa" name="SpaCentar" value="true" />
+                            <label for="SpaCentarDa">Da</label>
+
+                            <input type="radio" id="SpaCentarNe" name="SpaCentar" value="false" checked/>
+                            <label for="SpaCentarNe">Ne</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label><b>Bazen</b></label><br />
+                            <input type="radio" id="BazenDa" name="Bazen" value="true" />
+                            <label for="BazenDa">Da</label>
+
+                            <input type="radio" id="BazenNe" name="Bazen" value="false" checked/>
+                            <label for="BazenNe">Ne</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label><b>Wifi</b></label><br />
+                            <input type="radio" id="WifiDa" name="Wifi" value="true" />
+                            <label for="WifiDa">Da</label>
+
+                            <input type="radio" id="WifiNe" name="Wifi" value="false" checked/>
+                            <label for="WifiNe">Ne</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Dodaj smeštaj</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

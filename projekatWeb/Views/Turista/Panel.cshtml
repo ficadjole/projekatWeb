@@ -1,0 +1,144 @@
+﻿@using projekatWeb.Models
+@using projekatWeb.DTOs
+@model TuristaDto
+@{
+    ViewBag.Title = "Panel";
+    int brKolona = 3; 
+}
+<div class="container">
+    <div class="container">
+        <h1 class="text-center">Vasi rezervisani aranzmani</h1>
+
+        @if (ViewBag.Poruka != null)
+        {
+            <p class="bg-success text-center">@ViewBag.Poruka</p>
+
+        }
+
+        @if (ViewBag.Neuspesno != null)
+        {
+            <p class="bg-danger text-center">@ViewBag.Neuspesno</p>
+        }
+    </div>
+    <div class="container d-flex align-items-center justify-content-center my-5">
+        <form action="~/Turista/Pretraga" method="post" class="mx-5">
+            <div class="d-flex align-items-center justify-content-center gap-2">
+                <input type="number" class="form-control" placeholder="ID" aria-label="ID" name="idRezervacije" min="1" max="50">
+                <input type="text" class="form-control" placeholder="Naziv aranzmana" aria-label="Naziv aranzmana" name="nazivAranzmana">
+
+                <div class="form-check ms-2">
+                    <input class="form-check-input" type="radio" name="status" id="radioDefault1" value="true">
+                    <label class="form-check-label" for="radioDefault1">Aktivne</label>
+                </div>
+                <div class="form-check ms-2">
+                    <input class="form-check-input" type="radio" name="status" id="radioDefault1" value="false">
+                    <label class="form-check-label" for="radioDefault1">Istekle</label>
+                </div>
+                <button type="submit" name="akcija" value="pretrazi" class="btn btn-success ms-2">Pretrazi</button>
+                <button type="submit" name="akcija" value="osvezi" class="btn btn-danger ms-2">Osvezi</button>
+            </div>
+        </form>
+
+        <p class="fw-bold">Sortiraj aranzmane po imenu </p>
+
+        <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajName", "Turista", new {vrsta = "asc" })">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5" />
+            </svg>
+        </a>
+
+        <a class="mx-1 link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0" href="@Url.Action("SortirajName", "Turista", new {vrsta = "desc" })">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1" />
+            </svg>
+        </a>
+    </div>
+
+    <div class="container">
+        @foreach (var rezervacija in Model.Rezervacije)
+        {
+            var aranzman = Model.Aranzmani.FirstOrDefault(a => a.Id == rezervacija.IdAranzman);
+            var jedinica = Model.SmestajneJedinice.FirstOrDefault(j => j.Id == rezervacija.IdSmestajneJedinice);
+
+            if (Model.Rezervacije.IndexOf(rezervacija) % brKolona == 0)
+            {
+                if (Model.Rezervacije.IndexOf(rezervacija) != 0)
+                {
+                @:</div> <!-- zatvaranje prethodnog reda -->
+            }
+            @:<div class="row mt-4">
+                    <!-- otvaranje novog reda -->
+            }
+
+            if (aranzman != null)
+            {
+                <div class="col-4 mb-3">
+                    <div class="card h-100">
+                        @if (aranzman != null)
+                        {
+                            <img src="@Url.Content(aranzman.PosterAranzmanaUrl)" class="card-img-top" alt="poster">
+                        }
+
+                        <div class="card-body">
+                            @if (aranzman != null)
+                            {
+                                <h4 class="card-title text-decoration-underline">@aranzman.NazivAranzmana</h4>
+                                <p class="fw-bold">Destinacija: @aranzman.Destinacija</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="fw-bold">Polazak: @aranzman.DatumPolaska</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="fw-bold">Povratak: @aranzman.DatumPovratka</p>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (jedinica != null)
+                            {
+                                <p class="fw-bold text-decoration-underline">Smeštajna jedinica:</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="fw-bold">Cena: @jedinica.CenaJedinice €</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="fw-bold">Kapacitet: @jedinica.MaksBrOsoba</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p class="fw-bold">PetFriendly: @(jedinica.PetFriendly ? "Da" : "Ne")</p>
+                                    </div>
+                                </div>
+                            }
+
+                            <p class="fw-bold">
+                                Rezervacija br. @rezervacija.IdRezervacije:
+                                @(rezervacija.Status ? "Aktivna" : "Istekla")
+                            </p>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    @if (aranzman != null)
+                                    {
+                                        <form action="~/Rezervacija/Redirekcija" method="post">
+                                            <input type="hidden" name="idAranzmana" value="@aranzman.Id" />
+                                            <input type="hidden" name="idSmestajneJedinice" value="@jedinica.Id" />
+                                            <button class="btn btn-success" type="submit">Detalji</button>
+                                        </form>
+                                    }
+                                </div>
+                                <div class="col-6 text-end">
+                                    @if (rezervacija.Status && aranzman != null && aranzman.DatumPolaska.AsDateTime() > DateTime.Now)
+                                    {
+                                        <a href="@Url.Action("Otkazi", "Turista", new { idRezervacije = rezervacija.IdRezervacije })" class="btn btn-danger">Otkaži</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        }
+    </div>
+</div>

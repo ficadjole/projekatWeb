@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Registracija";
+}
+
+<h2 class="text-center">Registracija</h2>
+
+<div class="container h-50 w-50">
+    <form class="row g-3 needs-validation bg-dark bg-opacity-25 my-3 rounded py-3" novalidate action="~/Auth/RegistracijaAkcija" method="post">
+        <div class="col-md-6">
+            <label for="Ime" class="form-label">Ime</label>
+            <input type="text" class="form-control" id="Ime" name="Ime" required placeholder="Ime">
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="prezime" class="form-label">Prezime</label>
+            <input type="text" class="form-control" id="prezime" name="Prezime" required placeholder="Prezime">
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="korisnickoIme" class="form-label">Korisnicko ime</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="korisnickoIme" name="KorisnickoIme" aria-describedby="inputGroupPrepend" required placeholder="Korisnicko ime">
+                <div class="valid-feedback">
+                    Odlicno je!
+                </div>
+                <div class="invalid-feedback">
+                    Molim Vas unesite podatke.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="password" class="form-label">Lozinka</label>
+            <input type="password" class="form-control" id="password" name="Lozinka" required>
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="Email" required placeholder="Email">
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label for="datum" class="form-label">Datum rodjenja</label>
+            <input type="date" class="form-control" id="datum" name="DatumRodjenja" required>
+            <div class="valid-feedback">
+                Odlicno je!
+            </div>
+            <div class="invalid-feedback">
+                Molim Vas unesite podatke.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label class="mb-2">Pol</label>
+            <div class="row">
+                <div class="col-6">
+                    <input class="form-check-input" type="radio" value="Muski" name="Pol" id="polM" required>
+                    <label class="form-label" for="polM">Muski</label>
+                    <div class="valid-feedback">
+                        Odlicno je!
+                    </div>
+                    <div class="invalid-feedback">
+                        Molim Vas unesite podatke.
+                    </div>
+                </div>
+                <div class="col-6">
+                    <input class="form-check-input" type="radio" value="Zenski" name="Pol" id="polZ" required>
+                    <label class="form-label" for="polZ">Zenski</label>
+                    <div class="valid-feedback">
+                        Odlicno je!
+                    </div>
+                    <div class="invalid-feedback">
+                        Molim Vas unesite podatke.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-dark" type="submit">Registruj se</button>
+        </div>
+    </form>
+</div>
+<div class="container d-flex justify-content-center">
+    @if (ViewBag.Poruka != null)
+    {
+        <p class="alert alert-danger w-50 fw-bold">@ViewBag.Poruka</p>
+    }
+</div>
+
+<script>
+    (function () {
+        'use strict'
+
+        // Selektuje sve forme sa needs-validation klasom
+        var forms = document.querySelectorAll('.needs-validation')
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

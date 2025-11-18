@@ -1,0 +1,152 @@
+{
+  "$type": "System.Collections.Generic.List`1[[projekatWeb.Models.Korisnik, projekatWeb]], mscorlib",
+  "$values": [
+    {
+      "$type": "projekatWeb.Models.Korisnik, projekatWeb",
+      "Id": 1,
+      "KorisnickoIme": "admin",
+      "Lozinka": "admin",
+      "Ime": "Filip",
+      "Prezime": "Velemir",
+      "Pol": 1,
+      "Email": "filip.admin@example.com",
+      "DatumRodjenja": "23/08/2003",
+      "Uloga": 0
+    },
+    {
+      "$type": "projekatWeb.Models.Menadzer, projekatWeb",
+      "KreiraniAranzmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          7,
+          6
+        ]
+      },
+      "Id": 2,
+      "KorisnickoIme": "neske",
+      "Lozinka": "123",
+      "Ime": "Neso",
+      "Prezime": "Lutovac",
+      "Pol": 0,
+      "Email": "neske@gmail.com",
+      "DatumRodjenja": "14/05/1985",
+      "Uloga": 1
+    },
+    {
+      "$type": "projekatWeb.Models.Turista, projekatWeb",
+      "RezervisaniAranazmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          1,
+          2,
+          3
+        ]
+      },
+      "Id": 3,
+      "KorisnickoIme": "rambo amadeus",
+      "Lozinka": "123",
+      "Ime": "Antonije",
+      "Prezime": "Pusic",
+      "Pol": 0,
+      "Email": "amadeus@gmail.com",
+      "DatumRodjenja": "14/06/1963",
+      "Uloga": 2
+    },
+    {
+      "$type": "projekatWeb.Models.Turista, projekatWeb",
+      "RezervisaniAranazmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          4
+        ]
+      },
+      "Id": 4,
+      "KorisnickoIme": "vendeta",
+      "Lozinka": "123",
+      "Ime": "Alan",
+      "Prezime": "Mur",
+      "Pol": 0,
+      "Email": "alan_mur@uns.ac.rs",
+      "DatumRodjenja": "18/11/1953",
+      "Uloga": 2
+    },
+    {
+      "$type": "projekatWeb.Models.Turista, projekatWeb",
+      "RezervisaniAranazmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          5,
+          6
+        ]
+      },
+      "Id": 5,
+      "KorisnickoIme": "vanja",
+      "Lozinka": "123",
+      "Ime": "Vanja",
+      "Prezime": "Nikolic",
+      "Pol": 1,
+      "Email": "vanja@gmail.com",
+      "DatumRodjenja": "08/04/2005",
+      "Uloga": 2
+    },
+    {
+      "$type": "projekatWeb.Models.Menadzer, projekatWeb",
+      "KreiraniAranzmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          5
+        ]
+      },
+      "Id": 6,
+      "KorisnickoIme": "peki",
+      "Lozinka": "123",
+      "Ime": "Petar",
+      "Prezime": "Kocic",
+      "Pol": 0,
+      "Email": "peki@gmail.com",
+      "DatumRodjenja": "11/11/2000",
+      "Uloga": 1
+    },
+    {
+      "$type": "projekatWeb.Models.Turista, projekatWeb",
+      "RezervisaniAranazmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          7
+        ]
+      },
+      "Id": 7,
+      "KorisnickoIme": "meri",
+      "Lozinka": "123",
+      "Ime": "Meri",
+      "Prezime": "Bird",
+      "Pol": 1,
+      "Email": "meri.bird@gmail.com",
+      "DatumRodjenja": "04/03/1998",
+      "Uloga": 2
+    },
+    {
+      "$type": "projekatWeb.Models.Turista, projekatWeb",
+      "RezervisaniAranazmani": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib]], mscorlib",
+        "$values": [
+          8
+        ]
+      },
+      "Id": 8,
+      "KorisnickoIme": "kaca",
+      "Lozinka": "123",
+      "Ime": "Katarina",
+      "Prezime": "Kalauz",
+      "Pol": 1,
+      "Email": "k@gmail.com",
+      "DatumRodjenja": "02/09/2025",
+      "Uloga": 2
+    }
+  ]
+}

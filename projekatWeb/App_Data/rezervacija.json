@@ -1,0 +1,58 @@
+[
+  {
+    "IdRezervacije": 1,
+    "IdTurista": 3,
+    "Status": false,
+    "IdAranzman": 1,
+    "IdSmestajneJedinice": 1
+  },
+  {
+    "IdRezervacije": 2,
+    "IdTurista": 3,
+    "Status": true,
+    "IdAranzman": 1,
+    "IdSmestajneJedinice": 2
+  },
+  {
+    "IdRezervacije": 3,
+    "IdTurista": 3,
+    "Status": false,
+    "IdAranzman": 3,
+    "IdSmestajneJedinice": 7
+  },
+  {
+    "IdRezervacije": 4,
+    "IdTurista": 4,
+    "Status": true,
+    "IdAranzman": 4,
+    "IdSmestajneJedinice": 9
+  },
+  {
+    "IdRezervacije": 5,
+    "IdTurista": 5,
+    "Status": true,
+    "IdAranzman": 2,
+    "IdSmestajneJedinice": 5
+  },
+  {
+    "IdRezervacije": 6,
+    "IdTurista": 5,
+    "Status": true,
+    "IdAranzman": 4,
+    "IdSmestajneJedinice": 9
+  },
+  {
+    "IdRezervacije": 7,
+    "IdTurista": 7,
+    "Status": true,
+    "IdAranzman": 5,
+    "IdSmestajneJedinice": 11
+  },
+  {
+    "IdRezervacije": 8,
+    "IdTurista": 8,
+    "Status": true,
+    "IdAranzman": 1,
+    "IdSmestajneJedinice": 1
+  }
+]

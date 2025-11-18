@@ -1,0 +1,93 @@
+[
+  {
+    "Id": 1,
+    "TipSmestaja": 0,
+    "NazivSmestaja": "Paris Louvre Opera",
+    "BrojZvezdica": 3,
+    "Bazen": false,
+    "SpaCentar": false,
+    "OsobeSaInvaliditetom": true,
+    "Wifi": true,
+    "LogickoBrisanje": false,
+    "SmestajneJedinice": [
+      1,
+      2
+    ]
+  },
+  {
+    "Id": 2,
+    "TipSmestaja": 2,
+    "NazivSmestaja": "Vila Moskva",
+    "BrojZvezdica": 2,
+    "Bazen": false,
+    "SpaCentar": false,
+    "OsobeSaInvaliditetom": false,
+    "Wifi": true,
+    "LogickoBrisanje": false,
+    "SmestajneJedinice": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "Id": 3,
+    "TipSmestaja": 0,
+    "NazivSmestaja": "Hotel Mumbai",
+    "BrojZvezdica": 5,
+    "Bazen": true,
+    "SpaCentar": true,
+    "OsobeSaInvaliditetom": true,
+    "Wifi": true,
+    "LogickoBrisanje": false,
+    "SmestajneJedinice": [
+      6,
+      7
+    ]
+  },
+  {
+    "Id": 4,
+    "TipSmestaja": 2,
+    "NazivSmestaja": "Villa Wolf Brave",
+    "BrojZvezdica": 4,
+    "Bazen": true,
+    "SpaCentar": false,
+    "OsobeSaInvaliditetom": true,
+    "Wifi": true,
+    "LogickoBrisanje": false,
+    "SmestajneJedinice": [
+      8,
+      9
+    ]
+  },
+  {
+    "Id": 5,
+    "TipSmestaja": 1,
+    "NazivSmestaja": "Motel Deny",
+    "BrojZvezdica": 3,
+    "Bazen": false,
+    "SpaCentar": false,
+    "OsobeSaInvaliditetom": true,
+    "Wifi": true,
+    "LogickoBrisanje": false,
+    "SmestajneJedinice": [
+      10,
+      11
+    ]
+  },
+  {
+    "Id": 6,
+    "TipSmestaja": 0,
+    "NazivSmestaja": "Proba",
+    "BrojZvezdica": 3,
+    "Bazen": false,
+    "SpaCentar": false,
+    "OsobeSaInvaliditetom": true,
+    "Wifi": true,
+    "LogickoBrisanje": true,
+    "SmestajneJedinice": [
+      12,
+      13
+    ]
+  }
+]

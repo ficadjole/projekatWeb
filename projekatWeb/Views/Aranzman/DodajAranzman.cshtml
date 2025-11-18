@@ -1,0 +1,160 @@
+﻿@using projekatWeb.Models
+@using projekatWeb.DTOs
+@{
+    ViewBag.Title = "DodajAranzman";
+}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-2">
+
+        </div>
+        <div class="col-lg-8">
+            <div class="container text-center bg-black bg-opacity-25 p-2 rounded mb-4">
+                <form method="post" action="~/Aranzman/KreirajAranzman">
+                    <label class="fw-bold">Naziv aranzmana: </label>
+                    <input required name="NazivAranzmana" type="text" class="h3" placeholder="Naziv">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="fw-bold">
+                                <label class="fw-bold">Datum poslaska: </label>
+                                <input type="date" required name="DatumPolaska" min="@DateTime.Now.ToString("yyyy-MM-dd")"/>
+
+                        </div>
+                        <div class="col-6">
+                            <label class="fw-bold">Datum povratka:</label>
+                            <input type="date" required name="DatumPovratka" min="@DateTime.Now.AddDays(3).ToString("yyyy-MM-dd")"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 text-lg-start">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="fw-bold h3">Destinacija: </label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" required name="Destinacija" placeholder="Destinacija"/>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-4">
+                                    <label class="fw-bold">Opis: </label>
+
+                                </div>
+                                <div class="col-8">
+                                    <textarea class="form-control" required style="height:100px;" aria-label="With textarea" name="OpisAranzmana" placeholder="Opis aranzmana"></textarea>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="fw-bold">Program aranzmana: </label>
+                                </div>
+                                <div class="col-8">
+                                    <textarea class="form-control" style="height:100px;" aria-label="With textarea" name="ProgramAranzmana" placeholder="Program aranzmana" required></textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label class="fw-bold">Maksimalan broj putnika: </label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" required name="MaksBrPutnika" min="5" max="30" placeholder="5-30"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Poster aranžmana:</label>
+
+                                <!-- trenutna slika -->
+                                <div class="mb-2">
+                                    <img id="posterPreview"
+                                         src="@Url.Content("~/Content/Images/Aranzmani/placeholderImg.jpg")"
+                                         alt="Poster aranzmana"
+                                         class="rounded img-thumbnail"
+                                         style="max-height:200px;" />
+                                </div>
+
+                                <!-- upload polje -->
+                                <input type="file"
+                                       class="form-control"
+                                       id="posterInput"
+                                       name="noviPoster"
+                                       accept="image/*" required />
+                                <label class="form-label text-danger fw-bold text-start">Slike birati iz foldera: ~/Contnent/Images/Aranzmani/</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label fw-bold text-start">Tip aranžmana:</label>
+                        <div class="d-flex flex-wrap">
+                            @foreach (TipAranzmana tip in Enum.GetValues(typeof(TipAranzmana)))
+                            {
+
+                                <div class="form-check me-3">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="TipAranzmana"
+                                           id="tip_@tip"
+                                           value="@tip"
+                                           required />
+                                    <label class="form-check-label" for="tip_@tip">
+                                        @tip.ToString().Replace("_", " ")
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label fw-bold text-start">Tip prevoza:</label>
+                        <div class="d-flex flex-wrap">
+                            @foreach (TipPrevoza tip in Enum.GetValues(typeof(TipPrevoza)))
+                            {
+
+                                <div class="form-check me-3">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="TipPrevoza"
+                                           id="prevoz_@tip"
+                                           value="@tip"
+                                           required />
+                                    <label class="form-check-label" for="prevoz_@tip">
+                                        @tip.ToString().Replace("_", " ")
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="container text-end">
+                        <button type="submit" class="btn btn-success">Dodaj aranzman</button>
+
+                        @if (ViewBag.Poruka != null)
+                        {
+                            <div class="alert bg-info text-center py-2 mt-2">
+                                @ViewBag.Poruka
+                            </div>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+    </div>
+    <script>
+        document.getElementById("posterInput").addEventListener("change", function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById("posterPreview").setAttribute("src", e.target.result);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>

@@ -1,0 +1,376 @@
+﻿@using projekatWeb.DTOs
+@using projekatWeb.Models
+@model AzuriranjeAranzmanaDto
+@{
+    ViewBag.Title = "Uredi";
+
+    DateTime datumPolaska = Model.Aranzman.DatumPolaska.AsDateTime();
+    DateTime datumPovratka = Model.Aranzman.DatumPovratka.AsDateTime();
+
+    string datumPolaskaVrednost = datumPolaska.ToString("yyyy-MM-dd");
+    string datumPovratkaVrednost = datumPovratka.ToString("yyyy-MM-dd");
+}
+<div class="container text-center">
+    <div class="row">
+        <div class="col-sm-2">
+
+        </div>
+        <div class="col-lg-8">
+
+            <!--Aranzman-->
+
+            <div class="container text-center bg-black bg-opacity-25 p-2 rounded mb-4">
+
+                <form method="post" action="~/Aranzman/AzurirajAranzman">
+                    <input value="@Model.Aranzman.Id" type="hidden" name="Id" />
+                    <input value="@Model.Aranzman.IdSmestaj" type="hidden" name="IdSmestaj" />
+                    <input value="@Model.Aranzman.LogickoBrisanje" type="hidden" name="LogickoBrisanje" />
+                    <label class="fw-bold">Naziv aranzmana: </label>
+                    <input value="@Model.Aranzman.NazivAranzmana" name="NazivAranzmana" type="text" class="h3">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="fw-bold">
+                                <label class="fw-bold">Datum poslaska: </label>
+                                <input type="date" value="@datumPolaskaVrednost" name="DatumPolaska" />
+
+                        </div>
+                        <div class="col-6">
+                            <label class="fw-bold">Datum povratka:</label>
+                            <input type="date" value="@datumPovratkaVrednost" name="DatumPovratka" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 text-lg-start">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="fw-bold h3">Destinacija: </label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" value="@Model.Aranzman.Destinacija" name="Destinacija" />
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-4">
+                                    <label class="fw-bold">Opis: </label>
+
+                                </div>
+                                <div class="col-8">
+                                    <textarea class="form-control" style="height:100px;" aria-label="With textarea" name="OpisAranzmana">@Model.Aranzman.OpisAranzmana</textarea>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="fw-bold">Program aranzmana: </label>
+                                </div>
+                                <div class="col-8">
+                                    <textarea class="form-control" style="height:100px;" aria-label="With textarea" name="ProgramAranzmana">@Model.Aranzman.ProgramAranzmana</textarea>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-6">
+                                    <label class="fw-bold">Maksimalan broj putnika: </label>
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" value="@Model.Aranzman.MaksBrPutnika" name="MaksBrPutnika" min="5" max="30" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Poster aranžmana:</label>
+
+                                <!-- trenutna slika -->
+                                <div class="mb-2">
+                                    <img id="posterPreview"
+                                         src="@Url.Content(Model.Aranzman.PosterAranzmanaUrl)"
+                                         alt="Poster aranzmana"
+                                         class="rounded img-thumbnail"
+                                         style="max-height:200px;" />
+                                </div>
+
+                                <!-- upload polje -->
+                                <input type="file"
+                                       class="form-control"
+                                       id="posterInput"
+                                       name="noviPoster"
+                                       accept="image/*" />
+                                <label class="form-label text-danger fw-bold text-start">Slike birati iz foldera: ~/Contnent/Images/Aranzmani/</label>
+
+                                <!-- hidden field da sačuva staru vrednost ako ne menja -->
+                                <input type="hidden"
+                                       name="PosterAranzmanaUrl"
+                                       value="@Model.Aranzman.PosterAranzmanaUrl" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label fw-bold text-start">Tip aranžmana:</label>
+                        <div class="d-flex flex-wrap">
+                            @foreach (TipAranzmana tip in Enum.GetValues(typeof(TipAranzmana)))
+                            {
+                                var cekirano = (Model.Aranzman.TipAranzmana == tip) ? "checked" : "";
+
+                                <div class="form-check me-3">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="TipAranzmana"
+                                           id="tip_@tip"
+                                           value="@tip"
+                                           @cekirano />
+                                    <label class="form-check-label" for="tip_@tip">
+                                        @tip.ToString().Replace("_", " ")
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label fw-bold text-start">Tip prevoza:</label>
+                        <div class="d-flex flex-wrap">
+                            @foreach (TipPrevoza tip in Enum.GetValues(typeof(TipPrevoza)))
+                            {
+                                var cekirano = (Model.Aranzman.TipPrevoza == tip) ? "checked" : "";
+
+                                <div class="form-check me-3">
+                                    <input class="form-check-input"
+                                           type="radio"
+                                           name="TipPrevoza"
+                                           id="prevoz_@tip"
+                                           value="@tip"
+                                           @cekirano />
+                                    <label class="form-check-label" for="prevoz_@tip">
+                                        @tip.ToString().Replace("_", " ")
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="container text-end">
+                        <button type="submit" class="btn btn-success">Azuriraj aranzman</button>
+                        @Html.ActionLink("Obrisi aranzman", "Obrisi", new { id = Model.Aranzman.Id }, new { @class = "btn btn-danger" })
+                        @if (ViewBag.Poruka != null)
+                        {
+                            <div class="alert alert-info mt-2 text-center" role="alert">
+                                @ViewBag.Poruka
+                            </div>
+                        }
+                    </div>
+                </form>
+            </div>
+
+            <div class="container text-center bg-black bg-opacity-25 p-2 rounded">
+                <h3>Smestaj</h3>
+                @if (Model.Smestaj.Id != 0 && !Model.Smestaj.LogickoBrisanje)
+                {
+                    <form action="~/Aranzman/AzurirajSmestaj" method="post">
+                        <input type="hidden" name="IdAranzmana" value="@Model.Aranzman.Id" />
+                        <input type="hidden" name="Id" value="@Model.Smestaj.Id" />
+                        <input type="hidden" name="SmestajneJedinice" value="@Model.Smestaj.SmestajneJedinice" />
+                        <div class="container">
+                            <div class="row text-start">
+                                <div class="col-6">
+                                    <div class="mb-3">
+                                        <label for="NazivSmestaja" class="form-label"><b>Naziv:</b></label>
+                                        <input type="text" class="form-control" id="NazivSmestaja" name="NazivSmestaja" value="@Model.Smestaj.NazivSmestaja" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="TipSmestaja" class="form-label"><b>Tip smestaja:</b></label>
+                                        <select class="form-select" id="TipSmestaja" name="TipSmestaja">
+                                            <option value="hotel" @(Model.Smestaj.TipSmestaja == TipSmestaja.hotel ? "selected" : "")>Hotel</option>
+                                            <option value="motel" @(Model.Smestaj.TipSmestaja == TipSmestaja.motel ? "selected" : "")>Motel</option>
+                                            <option value="vila" @(Model.Smestaj.TipSmestaja == TipSmestaja.vila ? "selected" : "")>Vila</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="BrojZvezdica" class="form-label"><b>Broj zvezdica:</b></label>
+                                        <input type="number" class="form-control" id="BrojZvezdica" name="BrojZvezdica" value="@Model.Smestaj.BrojZvezdica" min="1" max="5" />
+                                    </div>
+                                </div>
+                                <div class="col-6 align-content-center">
+                                    <div class="mb-3">
+                                        <label><b>Invaliditet</b></label><br />
+                                        <!--(Model.Smestaj.OsobeSaInvaliditetom ? "checked" : "") postavlja chechked ili nista u zavisnosti da li je true ili false u bazi-->
+                                        <input type="radio" id="OsobeSaInvaliditetomDa" name="OsobeSaInvaliditetom" value="true" @(Model.Smestaj.OsobeSaInvaliditetom ? "checked" : "") />
+                                        <label for="OsobeSaInvaliditetomDa">Da</label>
+
+                                        <input type="radio" id="OsobeSaInvaliditetomNe" name="OsobeSaInvaliditetom" value="false" @(!Model.Smestaj.OsobeSaInvaliditetom ? "checked" : "") />
+                                        <label for="OsobeSaInvaliditetomNe">Ne</label>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label><b>Spa centar</b></label><br />
+                                        <input type="radio" id="SpaCentarDa" name="SpaCentar" value="true" @(Model.Smestaj.SpaCentar ? "checked" : "") />
+                                        <label for="SpaCentarDa">Da</label>
+
+                                        <input type="radio" id="SpaCentarNe" name="SpaCentar" value="false" @(!Model.Smestaj.SpaCentar ? "checked" : "") />
+                                        <label for="SpaCentarNe">Ne</label>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label><b>Bazen</b></label><br />
+                                        <input type="radio" id="BazenDa" name="Bazen" value="true" @(Model.Smestaj.Bazen ? "checked" : "") />
+                                        <label for="BazenDa">Da</label>
+
+                                        <input type="radio" id="BazenNe" name="Bazen" value="false" @(!Model.Smestaj.Bazen ? "checked" : "") />
+                                        <label for="BazenNe">Ne</label>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label><b>Wifi</b></label><br />
+                                        <input type="radio" id="WifiDa" name="Wifi" value="true" @(Model.Smestaj.Wifi ? "checked" : "") />
+                                        <label for="WifiDa">Da</label>
+
+                                        <input type="radio" id="WifiNe" name="Wifi" value="false" @(!Model.Smestaj.Wifi ? "checked" : "") />
+                                        <label for="WifiNe">Ne</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 text-end">
+                                <button type="submit" class="btn btn-success">Azuriraj smestaj</button>
+                                <form action="~/Aranzman/ObrisiSmestaj" method="post">
+                                    <input type="hidden" name="id" value="@Model.Smestaj.Id" />
+                                    <input type="hidden" name="idAranzmana" value="@Model.Aranzman.Id" />
+                                    <button type="submit" class="btn btn-danger" formaction="~/Aranzman/ObrisiSmestaj">Obriši smeštaj</button>
+                                </form>
+                                @if (ViewBag.PorukaSmestaj != null)
+                                {
+                                    <div class="alert alert-info mt-2 text-center" role="alert">
+                                        @ViewBag.PorukaSmestaj
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </form>
+
+                }
+                else
+                {
+                    <h4>Nije kreiran smestaj</h4>
+                    @Html.ActionLink("Dodaj smestaj", "DodajSmestaj", new { id = Model.Aranzman.Id }, new { @class = "btn btn-success" })
+                }
+
+            </div>
+            <!--Smestajne jedinice-->
+
+            @if (Model.Smestaj.Id != 0)
+            {
+                <div class="container text-center bg-dark bg-opacity-25 mt-4 rounded py-2">
+                    <h3>Smestajne jedinice</h3>
+                    <div class="row">
+
+                        @if (Model.SmestajnaJedinica.Count() > 0)
+                        {
+
+
+                            foreach (var item in Model.SmestajnaJedinica)
+                            {
+
+                                if (!item.LogickoBrisanje)
+                                {
+                                    <div class="col">
+                                        <form action="~/Aranzman/AzurirajSmestajnuJedinicu" method="post">
+                                            <input type="hidden" name="Dostupnost" value="@item.Dostupnost" />
+                                            <input type="hidden" name="Id" value="@item.Id" />
+                                            <input type="hidden" name="idAranzmana" value="@Model.Aranzman.Id" />
+                                            <input type="hidden" name="idSmestaja" value="@Model.Smestaj.Id" />
+                                            <div class="col">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Smestajna jedinica
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <dl class="row">
+                                                            <dt class="col-6 fw-bold">Cena jedinice: </dt>
+                                                            <dd class="col-6">
+                                                                <input type="number" class="form-control" name="CenaJedinice" value="@item.CenaJedinice" min="10" max="1000" />
+                                                            </dd>
+
+                                                            <dt class="col-6 fw-bold">Maksimalan broj osoba: </dt>
+                                                            <dd class="col-6">
+                                                                <input type="number" class="form-control" name="MaksBrOsoba" value="@item.MaksBrOsoba" min="1" max="8" />
+                                                            </dd>
+
+                                                            <dt class="col-6 fw-bold">Pet friendly: </dt>
+                                                            <dd class="col-6">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="PetFriendly" id="PetFriendlyDa" value="true" @(item.PetFriendly ? "checked" : "") />
+                                                                    <label class="form-check-label" for="PetFriendlyDa">Da</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="PetFriendly" id="PetFriendlyNe" value="false" @(!item.PetFriendly ? "checked" : "") />
+                                                                    <label class="form-check-label" for="PetFriendlyNe">Ne</label>
+                                                                </div>
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-3 text-end">
+                                                @Html.ActionLink("Dodaj", "DodajJedinicu", new { id = Model.Smestaj.Id, idAranzmana = Model.Aranzman.Id }, new { @class = "btn btn-success" })
+                                                <button type="submit" class="btn btn-success">Azuriraj smestajnu jedinicu</button>
+                                                <form action="~/Aranzman/ObrisiSmestajnuJedinicu" method="post">
+                                                    <input type="hidden" name="id" value="@item.Id" />
+                                                    <input type="hidden" name="idSmestaja" value="@Model.Smestaj.Id" />
+                                                    <input type="hidden" name="idAranzmana" value="@Model.Aranzman.Id" />
+                                                    <button type="submit" class="btn btn-danger" formaction="~/Aranzman/ObrisiSmestajnuJedinicu">Obriši</button>
+                                                </form>
+
+                                                @if (ViewBag.PorukaJedinica != null && ViewBag.IdJedinice == item.Id)
+                                                {
+                                                    <div class="alert alert-info mt-2 text-center" role="alert">
+                                                        @ViewBag.PorukaJedinica
+                                                    </div>
+                                                }
+                                            </div>
+                                        </form>
+                                    </div>
+                                }
+
+
+
+                            }
+
+                        }
+                        else
+                        {
+                            <div class="container">
+                                <h4>Nisu kreirane smestajne jedinice</h4>
+                                @Html.ActionLink("Dodaj smestajnu jedinicu", "DodajJedinicu", new { id = Model.Smestaj.Id, idAranzmana = Model.Aranzman.Id }, new { @class = "btn btn-success" })
+                                @if (ViewBag.PorukaJedinica != null)
+                                {
+                                    <div class="alert alert-info mt-2 text-center" role="alert">
+                                        @ViewBag.PorukaJedinica
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+</div> 
+
+<script>
+    document.getElementById("posterInput").addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById("posterPreview").setAttribute("src", e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
