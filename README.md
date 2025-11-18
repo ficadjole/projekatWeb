@@ -47,7 +47,3 @@ The application supports the following roles and functionalities:
     * **Search/Filter:** Can search users by name and surname and filter by role.
 * **Manager Registration:** Registers new Managers.
 * **Initial Accounts:** Administrator accounts are loaded programmatically from a text file and cannot be added later.
-
-### ℹ️ Important Note on Search Functionality
-* **Combined Search:** Every search must be of a combined nature; the user enters values for multiple search parameters, and the results must satisfy **every** search criterion.
-* **Textual Search:** For text fields, the search should check if the attribute value **contains** the entered value (e.g., searching for "di" in the arrangement name should find "Divčibare zimovanje," "Leto na Maldivima," etc.).
